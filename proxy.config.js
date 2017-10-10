@@ -1,5 +1,5 @@
 'use strict';
-const proxyServer = "http://localhost:9090/uadp-srv/";
+const proxyServer = "http://localhost:9090/";
 
 const mock = {'GET /*.do': proxyServer, 'POST /*.do': proxyServer};
 
