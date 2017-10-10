@@ -1,0 +1,43 @@
+{
+  "private": true,
+  "dependencies": {
+    "antd": "~2.11.0",
+    "babel-plugin-import": "^1.2.1",
+    "components": "^0.1.0",
+    "fs-extra": "^3.0.1",
+    "history": "^4.6.2",
+    "html-loader": "^0.4.5",
+    "link": "^0.1.5",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-router": "^4.1.1",
+    "uadp-react": "~1.4.2"
+  },
+  "devDependencies": {
+    "atool-build": "^1.0.2",
+    "atool-test-mocha": "^0.1.7",
+    "babel-plugin-dva-hmr": "^0.1.0",
+    "babel-plugin-dev-expression": "^0.2.1",
+    "babel-plugin-transform-runtime": "^6.9.0",
+    "babel-runtime": "^6.9.2",
+    "copy-webpack-plugin": "^3.0.1",
+    "dora": "^0.4.3",
+    "dora-plugin-proxy": "^0.8.5",
+    "dora-plugin-webpack": "^1.0.0",
+    "dora-plugin-webpack-hmr": "^0.2.1",
+    "expect": "^1.20.2",
+    "reqwest": "^2.0.5",
+    "object-assign": "~4.1.0",
+    "uglify-js": "^2.7.4",
+    "html-webpack-plugin": "^2.29.0"
+  },
+  "theme": "./src/themes/theme.js",
+  "pre-commit": [
+    "lint"
+  ],
+  "scripts": {
+    "start": "dora --plugins \"proxy?port=8989,webpack,webpack-hmr\"",
+    "build": "atool-build",
+    "test": "atool-test-mocha ./src/**/*-test.js"
+  }
+}
