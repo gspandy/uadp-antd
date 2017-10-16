@@ -8,10 +8,10 @@ app.model(model);
 
 app.debug(true);
 
-app.ready(function(dispatch) {
-  dispatch({type: 'initOrgTree'});
-  dispatch({type:'initUserType'});
-  dispatch({type:'getCurrentUserType'});
+app.ready(function (dispatch) {
+	dispatch({type: 'initOrgTree'});
+	dispatch({type: 'initUserType'});
+	dispatch({type: 'getCurrentUserType'});
 });
 
 app.start(Root, 'root');

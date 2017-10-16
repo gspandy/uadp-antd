@@ -1,18 +1,57 @@
 //滚动条的设置
-.overflow{
+.overflow {
   height: 400px;
   overflow-y: auto;
   box-sizing: border-box;
   overflow-x: hidden;
 }
-.overflow::-webkit-scrollbar{width:2px; }
-.overflow::-webkit-scrollbar-track{background-color:#fff;}//滚动条背景颜色
-.overflow::-webkit-scrollbar-thumb{background-color:#2db7f5;border-radius: 5px;}//滚动条颜色
-.overflow::-webkit-scrollbar-thumb:hover {background-color:#2db7f5}//滚动条滑过颜色
-.overflow::-webkit-scrollbar-thumb:active {background-color:#2db7f5}
 
-.overflow::scrollbar{width:4px;}
-.overflow::scrollbar-track{background-color:#fff;}//滚动条背景颜色
-.overflow::scrollbar-thumb{background-color:#2db7f5;border-radius: 5px;}//滚动条颜色
-.overflow::scrollbar-thumb:hover {background-color:#2db7f5}//滚动条滑过颜色
-.overflow::scrollbar-thumb:active {background-color:#2db7f5}//点击后的滚动条颜色
+.overflow::-webkit-scrollbar {
+  width: 2px;
+}
+
+.overflow::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+//滚动条背景颜色
+.overflow::-webkit-scrollbar-thumb {
+  background-color: #2db7f5;
+  border-radius: 5px;
+}
+
+//滚动条颜色
+.overflow::-webkit-scrollbar-thumb:hover {
+  background-color: #2db7f5
+}
+
+//滚动条滑过颜色
+.overflow::-webkit-scrollbar-thumb:active {
+  background-color: #2db7f5
+}
+
+.overflow::scrollbar {
+  width: 4px;
+}
+
+.overflow::scrollbar-track {
+  background-color: #fff;
+}
+
+//滚动条背景颜色
+.overflow::scrollbar-thumb {
+  background-color: #2db7f5;
+  border-radius: 5px;
+}
+
+//滚动条颜色
+.overflow::scrollbar-thumb:hover {
+  background-color: #2db7f5
+}
+
+//滚动条滑过颜色
+.overflow::scrollbar-thumb:active {
+  background-color: #2db7f5
+}
+
+//点击后的滚动条颜色

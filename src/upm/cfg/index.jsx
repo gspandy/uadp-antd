@@ -6,8 +6,8 @@ let app = new stateContainer();
 
 app.model(CfgModel);
 
-app.ready(function(dispatch) {
-  dispatch({type:'listCfg', params: {pageNo: 1, pageSize: 20}});
+app.ready(function (dispatch) {
+	dispatch({type: 'listCfg'});
 });
 
 app.start(Root, 'root');
