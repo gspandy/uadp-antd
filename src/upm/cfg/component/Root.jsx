@@ -1,14 +1,12 @@
 import React from 'react';
-import {Layout, connect} from 'uadp-react';
-import {Button, Table, Input} from 'antd';
+import {connect} from 'uadp-react';
+import {Button, Table, Input, Layout} from 'antd';
 import SysModal from './CfgModal';
 import '../../../themes/index.less';
-
-const Box = Layout.Box;
+const {Header, Content} = Layout;
 const Search = Input.Search;
 
 function Root({dispatch, cfgPagination, cfgModalProps}) {
-
 	function onOK(isAdd, values) {
 		if (isAdd) {
 			dispatch({type: 'addCfg', params: values});
@@ -52,8 +50,14 @@ function Root({dispatch, cfgPagination, cfgModalProps}) {
 	};
 
 	return (
-		<Layout>
-			<Box region="north" style={{height: 40, paddingTop: 5}}>
+		<Layout style={{height: '100%', background: '#fff'}}>
+			<Header style={{
+				height: '40px',
+				lineHeight: '40px',
+				background: '#fff',
+				padding: '1px 5px',
+				borderBottom: '1px solid #e9e9e9'
+			}}>
 				<Button type='primary' icon="plus"
 						onClick={() => dispatch({
 							type: 'openCfgModal',
@@ -63,12 +67,12 @@ function Root({dispatch, cfgPagination, cfgModalProps}) {
 					<Search placeholder="参数名称/参数键" style={{width: 200}}
 							onSearch={(name) => dispatch({type: 'searchCfg', params: {value: name}})}/>
 				</div>
-			</Box>
-			<Box region="center">
+			</Header>
+			<Content style={{overflow: 'auto'}}>
 				<Table rowKey="key" size={'middle'} bordered={true} dataSource={cfgPagination.rows} columns={columns}
 					   pagination={pagination}></Table>
 				<SysModal {...cfgModalProps} onOk={onOK} onClose={() => dispatch({type: 'closeCfgModal'})}/>
-			</Box>
+			</Content>
 		</Layout>
 	);
 }
