@@ -47,12 +47,6 @@ export function updateCfg(state, params, put, dispatch) {
 	Object.assign(cfgModalProps, {loading: true});
 	put(cfgModalProps);
 	request.post('updateCfg.do', params, function (res) {
-		if (!res.success) {
-			message.error(res.msg);
-			Object.assign(cfgModalProps, {loading: false});
-			put(cfgModalProps);
-			return;
-		}
 		Object.assign(cfgModalProps, {loading: false, visible: false});
 		put(cfgModalProps);
 		dispatch({type: 'listCfg'});

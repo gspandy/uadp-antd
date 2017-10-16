@@ -61,7 +61,7 @@ function Root({dispatch, cfgPagination, cfgModalProps}) {
 				<Button type='primary' icon="plus"
 						onClick={() => dispatch({
 							type: 'openCfgModal',
-							params: {editData: {}, visible: true}
+							params: {editData: {}, isNew: true, visible: true}
 						})}>新增</Button>
 				<div style={{float: 'right', paddingBottom: 3, paddingRight: 10}}>
 					<Search placeholder="参数名称/参数键" style={{width: 200}}

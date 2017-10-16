@@ -42,7 +42,7 @@ function CfgModal({form, isNew, editData, visible, loading, onOk, onClose}) {
 					rules: [{
 						required: true, message: '请输入参数键！',
 					}]
-				})(<Input autoComplete="off"/>)}
+				})(<Input autoComplete="off" disabled={isNew ? false : true}/>)}
 			</FormItem>
 			<FormItem {...formItemLayout} label="参数值">
 				{getFieldDecorator('value',
