@@ -31,7 +31,7 @@ export function generatePinyin(state, params, put) {
  * 初始化用户类型
  */
 export function initUserType(state, put) {
-	request.post('../dict/queryDict.do', {key: 'user_type'}, function (res) {
+	request.post('../dict/listDictByKey.do', {key: 'user_type'}, function (res) {
 		let userProps = state.userProps;
 		Object.assign(userProps, {userType: res});
 		put({userProps: userProps});

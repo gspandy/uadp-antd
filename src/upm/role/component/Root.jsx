@@ -12,10 +12,6 @@ import '../../../themes/index.less';
 const {Header, Footer, Sider, Content} = Layout;
 
 function Root({dispatch, dataSource}) {
-	let top = (<div>
-		<Button type='primary' icon="plus"
-				onClick={() => dispatch({type: 'openRoleModal', params: {isNew: true, editData: {}}})}>新增角色</Button>
-	</div>);
 	const columns = [
 		{title: '组织机构', dataIndex: 'toOrgName', key: 'toOrgName', width: 200},
 		{title: '角色名称', dataIndex: 'name', key: 'name', width: 200},
@@ -69,9 +65,23 @@ function Root({dispatch, dataSource}) {
 				<OrgTree/>
 			</Sider>
 			<Content>
-				<Table rowKey="id" size={'middle'} bordered={true} dataSource={dataSource} columns={columns}
-					   pagination={false}></Table>
-				<ModuleModal/><RoleModal/>
+				<Layout style={{height: '100%', background: '#fff'}}>
+					<Header style={{
+						height: '40px',
+						lineHeight: '40px',
+						background: '#fff',
+						padding: '1px 10px',
+						borderBottom: '1px solid #e9e9e9'
+					}}>
+						<Button type='primary' icon="plus"
+								onClick={() => dispatch({type: 'openRoleModal', params: {isNew: true, editData: {}}})}>新增角色</Button>
+					</Header>
+					<Content style={{overflow: 'auto'}}>
+						<Table rowKey="id" size={'middle'} bordered={true} dataSource={dataSource} columns={columns}
+							   pagination={false}></Table>
+						<ModuleModal/><RoleModal/>
+					</Content>
+				</Layout>
 			</Content>
 		</Layout>
 	);

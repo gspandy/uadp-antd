@@ -18,7 +18,7 @@ export function initOrgTree(put, dispatch) {
 }
 
 export function initOrgType(state, put) {
-	request.post('../dict/queryDict.do', {key: 'org_type'}, function (res) {
+	request.post('../dict/listDictByKey.do', {key: 'org_type'}, function (res) {
 		let roleProps = state.roleProps;
 		Object.assign(roleProps, {orgType: res});
 		put({roleProps: roleProps});

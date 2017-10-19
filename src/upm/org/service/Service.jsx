@@ -21,7 +21,7 @@ export function initOrgTree(put, dispatch) {
  * 加载机构类型数据
  */
 export function initOrgType(put) {
-	request.post('../dict/queryDict.do', {key: 'org_type'}, function (res) {
+	request.post('../dict/listDictByKey.do', {key: 'org_type'}, function (res) {
 		put({orgType: res});
 	});
 }
