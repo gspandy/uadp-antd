@@ -19,18 +19,6 @@ class ModifyPassword extends Component {
 		this.props.form.resetFields();
 	}
 
-	checkOldPass(rule, value, callback) {
-		if (!value) {
-			callback([new Error('请输入原始密码')]);
-		} else {
-			if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/.test(value)) {
-				callback([new Error('密码必须由8-20位数字和字母组成')]);
-			} else {
-				callback();
-			}
-		}
-	}
-
 	checkNewPass(rule, value, callback) {
 		if (!value) {
 			callback([new Error('请输入新密码')]);
@@ -97,9 +85,7 @@ class ModifyPassword extends Component {
 						<div className="pwd_right">
 							<Form horizontal form={this.props.form}>
 								<FormItem label="原始密码：" {...formItemLayout}>
-									{getFieldDecorator('oldPassword', {
-										rules: [{validator: this.checkOldPass.bind(this)}],
-									})(<Input type="password" placeholder="请输入原始密码"/>)}
+									{getFieldDecorator('oldPassword')(<Input type="password" placeholder="请输入原始密码"/>)}
 								</FormItem>
 								<FormItem label="新&nbsp;&nbsp;密&nbsp;&nbsp;码：" {...formItemLayout}>
 									{getFieldDecorator('newPassword', {
