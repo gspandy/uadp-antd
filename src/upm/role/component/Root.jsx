@@ -5,8 +5,8 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'uadp-react';
 import {Button, Table, Tooltip, Layout} from 'antd';
 import OrgTree from '../../org/component/OrgTree';
-import ModuleModal from '../component/ModuleModal';
-import RoleModal from '../component/RoleModal';
+import ModuleModal from './ModuleDialog';
+import RoleModal from './RoleDialog';
 import '../../../themes/index.less';
 
 const {Header, Footer, Sider, Content} = Layout;
@@ -31,7 +31,7 @@ function Root({dispatch, dataSource}) {
 			let disabled = (record.isFixed || !record.isLocalRole) ? 'disabled' : null;
 			return (<span>
             <Tooltip title="修改角色">
-              <Button onClick={e => dispatch({type: 'openRoleModal', params: {isNew: false, editData: record}})}
+              <Button onClick={e => dispatch({type: 'openRoleDialog', params: {isNew: false, editData: record}})}
 					  size={'small'} type="ghost" shape="circle"
 					  icon="edit" disabled={disabled} style={{marginRight: 5}}/>
             </Tooltip>
@@ -41,12 +41,12 @@ function Root({dispatch, dataSource}) {
 					  icon="close" disabled={disabled} style={{marginRight: 5}}/>
             </Tooltip>
             <Tooltip title="设置功能模块">
-              <Button onClick={e => dispatch({type: 'openModuleModal', params: {roleId: record.id, isSet: true}})}
+              <Button onClick={e => dispatch({type: 'openModuleDialog', params: {roleId: record.id, isSet: true}})}
 					  size={'small'} type="ghost" shape="circle"
 					  icon="setting" disabled={disabled} style={{marginRight: 5}}/>
             </Tooltip>
             <Tooltip title="查看功能模块">
-              <Button onClick={e => dispatch({type: 'openModuleModal', params: {roleId: record.id, isSet: false}})}
+              <Button onClick={e => dispatch({type: 'openModuleDialog', params: {roleId: record.id, isSet: false}})}
 					  size={'small'} type="ghost" shape="circle"
 					  icon="bars"/>
             </Tooltip>
@@ -74,7 +74,7 @@ function Root({dispatch, dataSource}) {
 						borderBottom: '1px solid #e9e9e9'
 					}}>
 						<Button type='primary' icon="plus"
-								onClick={() => dispatch({type: 'openRoleModal', params: {isNew: true, editData: {}}})}>新增角色</Button>
+								onClick={() => dispatch({type: 'openRoleDialog', params: {isNew: true, editData: {}}})}>新增角色</Button>
 					</Header>
 					<Content style={{overflow: 'auto'}}>
 						<Table rowKey="id" size={'middle'} bordered={true} dataSource={dataSource} columns={columns}

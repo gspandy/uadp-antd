@@ -3,6 +3,12 @@ import {Modal} from 'antd';
 
 const confirm = Modal.confirm;
 
+export function mockLogin(mockUrl, url, that) {
+	request.getp(mockUrl, function (res) {
+		this.setState({src: url});
+	});
+}
+
 export function queryUserCfg(that) {
 	request.post('upm/login/main.do', function (res) {
 		that.setState({userInfo: res});

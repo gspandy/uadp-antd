@@ -3,7 +3,7 @@ import * as service from '../service/Service';
 export default {
 	state: {
 		searchValue: '',
-		cfgModalProps: {
+		cfgDialogProps: {
 			loading: false,
 			visible: false,
 			isNew: true,
@@ -16,22 +16,16 @@ export default {
 	},
 	reducers: {
 		/*打开参数弹出窗口*/
-		openCfgModal: function ({state, params}) {
-			let cfgModalProps = state.cfgModalProps;
-			Object.assign(cfgModalProps, params);
-			return {cfgModalProps};
+		openCfgDialog: function ({state, params}) {
+			return {cfgDialogProps: {...state.cfgDialogProps, ...params}};
 		},
 		/*关闭参数弹出窗口*/
-		closeCfgModal: function ({state}) {
-			let cfgModalProps = state.cfgModalProps;
-			Object.assign(cfgModalProps, {visible: false});
-			return {cfgModalProps};
+		closeCfgDialog: function ({state}) {
+			return {cfgDialogProps: {...state.cfgDialogProps, visible: false}};
 		},
 		/** 改变分页时调用 **/
 		changePage: function ({state, params, put, dispatch}) {
-			let cfgPagination = state.cfgPagination;
-			Object.assign(cfgPagination, params);
-			put(cfgPagination);
+			put({cfgPagination: {...state.cfgPagination, params}});
 			dispatch({type: 'listCfg'})
 		},
 		/*查询参数列表*/
@@ -40,10 +34,7 @@ export default {
 		},
 		/** 搜索参数 **/
 		searchCfg: function ({state, params, put}) {
-			let cfgPagination = state.cfgPagination;
-			Object.assign(cfgPagination, {pageNo: 1});
-			put(cfgPagination);
-			put({searchValue: params.value, cfgPagination});
+			put({searchValue: params.value, cfgPagination: {...state.cfgPagination, pageNo: 1}});
 			service.listCfg(state, put);
 		},
 		/*新增参数*/

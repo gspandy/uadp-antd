@@ -3,7 +3,7 @@ import {Modal, Form, Input} from 'antd';
 
 const FormItem = Form.Item;
 
-function CfgModal({form, isNew, editData, visible, loading, onOk, onClose}) {
+function CfgDialog({form, isNew, editData, visible, loading, onOk, onClose}) {
 	function onConfirm() {
 		form.validateFields((err, values) => {
 			if (err) return;
@@ -60,4 +60,4 @@ function CfgModal({form, isNew, editData, visible, loading, onOk, onClose}) {
 	</Modal>);
 }
 
-export default Form.create()(CfgModal);
+export default Form.create()(CfgDialog);

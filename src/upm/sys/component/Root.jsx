@@ -4,13 +4,13 @@
 import React from 'react';
 import {connect} from 'uadp-react';
 import {Button, Table, Input, Layout} from 'antd';
-import SysModal from './SysModal';
+import SysModal from './SysDialog';
 import '../../../themes/index.less';
 
 const {Header, Content} = Layout;
 const Search = Input.Search;
 
-function Root({dispatch, sysList, sysModalProps}) {
+function Root({dispatch, sysList, OrgDialog}) {
 	function onOK(isAdd, values) {
 		if (isAdd) {
 			dispatch({type: 'addSys', params: values});
@@ -69,7 +69,7 @@ function Root({dispatch, sysList, sysModalProps}) {
 			<Content style={{overflow: 'auto'}}>
 				<Table rowKey="id" size={'middle'} bordered={true} dataSource={sysList} columns={columns}
 					   pagination={false}></Table>
-				<SysModal {...sysModalProps} onOk={onOK} onClose={() => dispatch({type: 'closeSysModal'})}/>
+				<SysModal {...OrgDialog} onOk={onOK} onClose={() => dispatch({type: 'closeSysModal'})}/>
 			</Content>
 		</Layout>
 	);
@@ -77,7 +77,7 @@ function Root({dispatch, sysList, sysModalProps}) {
 
 function mapStateToProps(state) {
 	return {
-		sysModalProps: state.sysModalProps,
+		OrgDialog: state.OrgDialog,
 		sysList: state.sysList,
 	};
 }

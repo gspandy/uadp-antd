@@ -32,7 +32,7 @@ export function queryRoleList(orgId, put) {
 }
 
 export function queryModuleTree(state, put) {
-	request.post('../module/queryModuleTree.do', function (res) {
+	request.post('../module/listModuleTree.do', function (res) {
 		let moduleProps = state.moduleProps;
 		Object.assign(moduleProps, {moduleTree: res});
 		put({moduleProps: moduleProps});
@@ -92,7 +92,7 @@ export function queryRoleModuleList(state, params, put) {
 export function updateRoleModule(state, params, dispatch) {
 	let p = {roleId: state.setRoleId, 'modules[]': params.selectedModules};
 	request.post('updateRoleModule.do', p, function (res) {
-		dispatch({type: 'closeModuleModal'});
+		dispatch({type: 'closeModuleDialog'});
 		message.success('设置角色功能模块成功！');
 	});
 }

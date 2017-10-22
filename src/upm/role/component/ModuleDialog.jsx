@@ -28,11 +28,11 @@ function ModuleModal({dispatch, isSet, selectedModules, visible, loading, module
 		});
 	}
 	let footer = (<div>
-		<Button onClick={() => dispatch({type: 'closeModuleModal'})}>返回</Button>
+		<Button onClick={() => dispatch({type: 'closeModuleDialog'})}>返回</Button>
 		{isSet ? <Button type="primary" loading={loading} onClick={e => onConfirm()}>保存</Button> : ''}
 	</div>);
 	return (<Modal title={title} width={400} footer={footer} visible={visible}
-				   onCancel={e => dispatch({type: 'closeModuleModal'})}>
+				   onCancel={e => dispatch({type: 'closeModuleDialog'})}>
 		<div className="overflow">
 			<Tree checkable
 				  defaultExpandedKeys={selectedModules}

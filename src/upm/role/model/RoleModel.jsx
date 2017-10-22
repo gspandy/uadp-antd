@@ -37,7 +37,7 @@ export default {
 			service.queryRoleList(state.selectTreeKey, put);
 		},
 		/*打开角色弹出框*/
-		openRoleModal: function ({state, params}) {
+		openRoleDialog: function ({state, params}) {
 			let roleProps = state.roleProps;
 			Object.assign(roleProps, params, {visible: true});
 			return {roleProps: roleProps};
@@ -53,11 +53,11 @@ export default {
 			service.queryModuleTree(state, put);
 		},
 		/*打开功能模块弹出框*/
-		openModuleModal: function ({state, params, put}) {
+		openModuleDialog: function ({state, params, put}) {
 			service.queryRoleModuleList(state, params, put);
 		},
 		/*关闭功能模块弹出框*/
-		closeModuleModal: function ({state}) {
+		closeModuleDialog: function ({state}) {
 			let moduleProps = state.moduleProps;
 			Object.assign(moduleProps, {visible: false});
 			return {moduleProps: moduleProps};

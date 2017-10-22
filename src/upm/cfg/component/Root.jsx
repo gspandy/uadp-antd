@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'uadp-react';
 import {Button, Table, Input, Layout} from 'antd';
-import SysModal from './CfgModal';
+import SysModal from './CfgDialog';
 import '../../../themes/index.less';
 const {Header, Content} = Layout;
 const Search = Input.Search;
 
-function Root({dispatch, cfgPagination, cfgModalProps}) {
+function Root({dispatch, cfgPagination, cfgDialogProps}) {
 	function onOK(isAdd, values) {
 		if (isAdd) {
 			dispatch({type: 'addCfg', params: values});
@@ -25,7 +25,7 @@ function Root({dispatch, cfgPagination, cfgModalProps}) {
 				let disabled = record.fixed ? 'disabled' : null;
 				return (<span>
               <Button title='修改' onClick={e => dispatch({
-				  type: 'openCfgModal',
+				  type: 'openCfgDialog',
 				  params: {isNew: false, visible: true, editData: record}
 			  })} size={'small'} type="ghost" shape="circle"
 					  icon="edit" disabled={disabled} style={{marginRight: 2}}/>
@@ -60,7 +60,7 @@ function Root({dispatch, cfgPagination, cfgModalProps}) {
 			}}>
 				<Button type='primary' icon="plus"
 						onClick={() => dispatch({
-							type: 'openCfgModal',
+							type: 'openCfgDialog',
 							params: {editData: {}, isNew: true, visible: true}
 						})}>新增</Button>
 				<div style={{float: 'right', paddingBottom: 3, paddingRight: 10}}>
@@ -71,7 +71,7 @@ function Root({dispatch, cfgPagination, cfgModalProps}) {
 			<Content style={{overflow: 'auto'}}>
 				<Table rowKey="key" size={'middle'} bordered={true} dataSource={cfgPagination.rows} columns={columns}
 					   pagination={pagination}></Table>
-				<SysModal {...cfgModalProps} onOk={onOK} onClose={() => dispatch({type: 'closeCfgModal'})}/>
+				<SysModal {...cfgDialogProps} onOk={onOK} onClose={() => dispatch({type: 'closeCfgDialog'})}/>
 			</Content>
 		</Layout>
 	);
@@ -79,7 +79,7 @@ function Root({dispatch, cfgPagination, cfgModalProps}) {
 
 function mapStateToProps(state) {
 	return {
-		cfgModalProps: state.cfgModalProps,
+		cfgDialogProps: state.cfgDialogProps,
 		cfgPagination: state.cfgPagination,
 	};
 }

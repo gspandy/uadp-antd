@@ -5,7 +5,7 @@ import {connect} from 'uadp-react';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-function OrgModal({dispatch, form, visible, loading, isNew, editData, orgType}) {
+function OrgDialog({dispatch, form, visible, loading, isNew, editData, orgType}) {
 	function onConfirm(e) {
 		form.validateFields((err, values) => {
 			if (!err) {
@@ -19,7 +19,7 @@ function OrgModal({dispatch, form, visible, loading, isNew, editData, orgType}) 
 	}
 
 	function onClose() {
-		dispatch({type: "closeOrgModal"});
+		dispatch({type: "closeOrgDialog"});
 	}
 
 	let {getFieldDecorator} = form;
@@ -158,4 +158,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps)(Form.create()(OrgModal));
+export default connect(mapStateToProps)(Form.create()(OrgDialog));

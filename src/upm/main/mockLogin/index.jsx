@@ -1,14 +1,13 @@
-import ModuleModel from './model/ModuleModel';
+import CfgModel from './model/CfgModel';
 import {stateContainer} from 'uadp-react';
 import Root from './component/Root';
 
 let app = new stateContainer();
 
-app.model(ModuleModel);
+app.model(CfgModel);
 
 app.ready(function (dispatch) {
-	dispatch({type: 'listModuleTree'});
-	dispatch({type: 'listModule'});
+	dispatch({type: 'listCfg'});
 });
 
 app.start(Root, 'root');

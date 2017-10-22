@@ -30,11 +30,11 @@ export default {
 			service.queryOrg(state.selectTreeKey, params.cascade, put);
 		},
 		/*打开机构弹出框*/
-		openOrgModal: function ({params}) {
+		openOrgDialog: function ({params}) {
 			return {...params, visible: true};
 		},
 		/*关闭机构弹出框*/
-		closeOrgModal: function ({params}) {
+		closeOrgDialog: function ({params}) {
 			return {visible: false};
 		},
 		/*保存组织机构*/

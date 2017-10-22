@@ -7,7 +7,7 @@ import {Button, Table, Checkbox, Input, Layout} from 'antd';
 import {Panel} from 'uadp-react';
 import '../../../themes/index.less';
 import OrgTree from './OrgTree';
-import OrgModal from './OrgModal';
+import OrgDialog from './OrgDialog';
 
 const {Sider, Header, Content} = Layout;
 const Search = Input.Search;
@@ -31,7 +31,7 @@ function Root({dispatch, dataSource}) {
 			let disabled = record.isFixed ? 'disabled' : null;
 			return (<span>
             <Button title='修改'
-					onClick={() => dispatch({type: 'openOrgModal', params: {isNew: false, editData: record}})}
+					onClick={() => dispatch({type: 'openOrgDialog', params: {isNew: false, editData: record}})}
 					size={'small'} type="ghost" shape="circle" icon="edit" disabled={disabled}/>
 				&nbsp;&nbsp;
 				<Button title='删除' onClick={() => dispatch({type: 'deleteOrg', params: record})} size={'small'}
@@ -59,7 +59,7 @@ function Root({dispatch, dataSource}) {
 					}}>
 						<div>
 							<Button type='primary' icon="plus" onClick={() => dispatch({
-								type: 'openOrgModal',
+								type: 'openOrgDialog',
 								params: {isNew: true, editData: {}}
 							})}>新增</Button>
 							<div style={{float: 'right', paddingBottom: 3}}>
@@ -71,7 +71,7 @@ function Root({dispatch, dataSource}) {
 					<Content style={{overflow: 'auto'}}>
 						<Table rowKey="id" size={'middle'} bordered={true} dataSource={dataSource} columns={columns}
 							   pagination={false}></Table>
-						<OrgModal/>
+						<OrgDialog/>
 					</Content>
 				</Layout>
 			</Content>

@@ -2,7 +2,7 @@ import * as service from '../service/Service';
 
 export default {
 	state: {
-		sysModalProps: {
+		OrgDialog: {
 			loading: false,
 			visible: false,
 			isNew: true,
@@ -12,15 +12,15 @@ export default {
 	reducers: {
 		/*打开系统弹出窗口*/
 		openSysModal: function ({state, params, put}) {
-			let sysModalProps = state.sysModalProps;
-			Object.assign(sysModalProps, params);
-			return {sysModalProps};
+			let OrgDialog = state.OrgDialog;
+			Object.assign(OrgDialog, params);
+			return {OrgDialog};
 		},
 		/*关闭系统弹出窗口*/
 		closeSysModal: function ({state, params, put}) {
-			let sysModalProps = state.sysModalProps;
-			Object.assign(sysModalProps, {visible: false});
-			return {sysModalProps};
+			let OrgDialog = state.OrgDialog;
+			Object.assign(OrgDialog, {visible: false});
+			return {OrgDialog};
 		},
 		/*查询系统列表*/
 		querySys: function ({state, params, put}) {

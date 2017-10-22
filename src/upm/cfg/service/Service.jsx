@@ -7,8 +7,7 @@ const confirm = Modal.confirm;
  * 查询参数列表
  */
 export function listCfg(state, put) {
-	let p = {};
-	Object.assign(p, {value: state.searchValue}, state.cfgPagination);
+	let p = {value: state.searchValue, ...state.cfgPagination};
 	request.post('listCfg.do', p, function (res) {
 		put({cfgPagination: res});
 	});
@@ -18,23 +17,18 @@ export function listCfg(state, put) {
  * 新增参数
  */
 export function addCfg(state, params, put, dispatch) {
-	let cfgModalProps = state.cfgModalProps;
-	Object.assign(cfgModalProps, {loading: true});
-	put(cfgModalProps);
+	put({cfgDialogProps: {...state.cfgDialogProps, loading: true}});
 	request.post('addCfg.do', params, function (res) {
 		if (!res.success) {
 			message.error(res.msg);
-			Object.assign(cfgModalProps, {loading: false});
-			put(cfgModalProps);
+			put({cfgDialogProps: {...state.cfgDialogProps, loading: false}});
 			return;
 		}
-		Object.assign(cfgModalProps, {loading: false, visible: false});
-		put(cfgModalProps);
+		put({cfgDialogProps: {...state.cfgDialogProps, loading: false, visible: false}});
 		dispatch({type: 'listCfg'});
 		message.success("新增参数成功！");
 	}, function (err) {
-		Object.assign(cfgModalProps, {loading: false});
-		put(cfgModalProps);
+		put({cfgDialogProps: {...state.cfgDialogProps, loading: false}});
 		message.error("请求错误！");
 	});
 }
@@ -43,16 +37,16 @@ export function addCfg(state, params, put, dispatch) {
  * 编辑参数
  */
 export function updateCfg(state, params, put, dispatch) {
-	let cfgModalProps = state.cfgModalProps;
-	Object.assign(cfgModalProps, {loading: true});
-	put(cfgModalProps);
+	let cfgDialogProps = state.cfgDialogProps;
+	Object.assign(cfgDialogProps, {loading: true});
+	put(cfgDialogProps);
 	request.post('updateCfg.do', params, function (res) {
-		Object.assign(cfgModalProps, {loading: false, visible: false});
-		put(cfgModalProps);
+		Object.assign(cfgDialogProps, {loading: false, visible: false});
+		put(cfgDialogProps);
 		dispatch({type: 'listCfg'});
 	}, function (err) {
-		Object.assign(cfgModalProps, {loading: false});
-		put(cfgModalProps);
+		Object.assign(cfgDialogProps, {loading: false});
+		put(cfgDialogProps);
 		message.error("请求错误！");
 	});
 }

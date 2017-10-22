@@ -16,12 +16,12 @@ export function querySys(params, put) {
  * 保存系统信息
  */
 export function addSys(state, params, put, dispatch) {
-	let sysModalProps = state.sysModalProps;
-	Object.assign(sysModalProps, {loading: true});
-	put(sysModalProps);
+	let OrgDialog = state.OrgDialog;
+	Object.assign(OrgDialog, {loading: true});
+	put(OrgDialog);
 	request.post('addSys.do', params, function () {
-		Object.assign(sysModalProps, {loading: false, visible: false});
-		put(sysModalProps);
+		Object.assign(OrgDialog, {loading: false, visible: false});
+		put(OrgDialog);
 		dispatch({type: 'querySys', params: {name: ''}});
 	});
 }
@@ -30,16 +30,16 @@ export function addSys(state, params, put, dispatch) {
  * 编辑系统信息
  */
 export function editSys(state, params, put, dispatch) {
-	let sysModalProps = state.sysModalProps;
-	Object.assign(sysModalProps, {loading: true});
-	put(sysModalProps);
+	let OrgDialog = state.OrgDialog;
+	Object.assign(OrgDialog, {loading: true});
+	put(OrgDialog);
 	request.post('updateSys.do', params, function () {
-		Object.assign(sysModalProps, {loading: false, visible: false});
-		put(sysModalProps);
+		Object.assign(OrgDialog, {loading: false, visible: false});
+		put(OrgDialog);
 		dispatch({type: 'querySys', params: {name: ''}});
 	}, function (err) {
-		Object.assign(sysModalProps, {loading: false});
-		put(sysModalProps);
+		Object.assign(OrgDialog, {loading: false});
+		put(OrgDialog);
 	});
 }
 

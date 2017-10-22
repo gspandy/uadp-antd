@@ -34,6 +34,17 @@ export default class Tab extends Component {
 		MainAction.needtModifyPassword(this);
 	}
 
+	componentDidMount() {
+		//是否模拟登陆
+		setTimeout(function () {
+			let sysList = this.state.sysList;
+			for(let i = 0; i < sysList.length; i++) {
+				if(sysList[i].isCheckedLogin) {
+					this.refs.mockIframe.src = sysList[i].loginUrl;
+				}
+			}
+		}.bind(this), 1000);
+	}
 
 	handleMenuClick(obj) {
 		let moduleTree;
@@ -153,6 +164,8 @@ export default class Tab extends Component {
 		if (this.state.src == '' && this.state.autoRunModules.length > 0) {
 			this.state.src = this.state.autoRunModules[0].url;
 		}
+		this.state.sysList = userInfo.sysList;
+
 		return (
 			<Layout className="tabRoot">
 				<Header style={{
@@ -241,6 +254,7 @@ export default class Tab extends Component {
 						</Menu>
 					</Sider>
 					<Content style={{overflow: 'hidden'}}>
+						<iframe ref="mockIframe" style={{display:'none'}}></iframe>
 						<Iframe src={this.state.src}></Iframe>
 					</Content>
 				</Layout>
