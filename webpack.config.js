@@ -2,7 +2,6 @@ const webpack = require('atool-build/lib/webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var fs = require('fs-extra');
-var join = require("path").join;
 var path = require('path');
 var glob = require('glob');
 
@@ -32,11 +31,6 @@ module.exports = function(webpackConfig, env) {
   //入口文件
   webpackConfig.entry = getEntry('src/**/index.jsx');
 
-  // Don't extract common.js and common.css
-  /*webpackConfig.plugins = webpackConfig.plugins.filter(function(plugin) {
-    return !(plugin instanceof webpack.optimize.CommonsChunkPlugin);
-  });*/
-
   webpackConfig.plugins.some(function(plugin, i){
     if(plugin instanceof webpack.optimize.CommonsChunkPlugin) {
       webpackConfig.plugins.splice(i, 1, new webpack.optimize.CommonsChunkPlugin({
@@ -50,22 +44,10 @@ module.exports = function(webpackConfig, env) {
 
   /**解决HtmlWebpackPlugin与atool-build内置处理html的loader冲突**/
   webpackConfig.module.loaders.forEach(function (loader,i) {
-    // var str = JSON.stringify(loader);
-    // if(str.indexOf("file?") != -1){
-    //   webpackConfig.module.loaders.splice(i,1);
-    // }
-    //
-    // if(loader.test.toString() == '/\.js$/') {
-    //   webpackConfig.module.loaders.splice(i,1);
-    // }
     // atool-build 0.9版本需要采用这种方式
     if(loader.test.toString() === '/\\.html?$/'){
       loader.loader = 'html';
     }
-    // less 文件中的图片打包处理
-    // if (loader.test.toString().indexOf('png|jpg|jpeg|gif') > -1) {
-    //   loader.loader = 'url-loader?limit=10&name=images/[name].[ext]';
-    // }
   });
 
 

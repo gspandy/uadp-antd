@@ -1,5 +1,6 @@
 import * as service from '../service/service';
 import {message} from 'antd';
+import assign from 'object-assign';
 
 export default {
 	namespace: 'user',
@@ -45,13 +46,13 @@ export default {
 				message.warning('请选择所属组织机构！', 3);
 				return;
 			}
-			Object.assign(userProps, params, {visible: true});
+			assign(userProps, params, {visible: true});
 			return {userProps: userProps};
 		},
 		/*关闭用户弹出框*/
 		closeUserModal: function ({state, params}) {
 			let userProps = state.userProps;
-			Object.assign(userProps, {visible: false});
+			assign(userProps, {visible: false});
 			return {userProps: userProps};
 		},
 		generatePinyin: function ({state, params, put}) {
@@ -69,13 +70,13 @@ export default {
 		/*打开重置密码弹出框*/
 		openResetPasswordModal: function ({state, params}) {
 			let resetPasswordProps = state.resetPasswordProps;
-			Object.assign(resetPasswordProps, {uid: params.uid}, {visible: true});
+			assign(resetPasswordProps, {uid: params.uid}, {visible: true});
 			return {resetPasswordProps: resetPasswordProps};
 		},
 		/*关闭重置密码弹出框*/
 		closeResetPasswordModal: function ({state, params}) {
 			let resetPasswordProps = state.resetPasswordProps;
-			Object.assign(resetPasswordProps, {visible: false});
+			assign(resetPasswordProps, {visible: false});
 			return {resetPasswordProps: resetPasswordProps};
 		},
 		/*重置密码*/
@@ -86,13 +87,13 @@ export default {
 		openSetRoleModal: function ({state, params, put, dispatch}) {
 			service.openSetRoleModal(state, params, put, dispatch);
 			let setRoleProps = state.setRoleProps;
-			Object.assign(setRoleProps, {visible: true});
+			assign(setRoleProps, {visible: true});
 			return {setRoleProps: setRoleProps};
 		},
 		/*关闭设置角色弹出框*/
 		closeSetRoleModal: function ({state, params}) {
 			let setRoleProps = state.setRoleProps;
-			Object.assign(setRoleProps, {visible: false});
+			assign(setRoleProps, {visible: false});
 			return {setRoleProps: setRoleProps};
 		},
 		moveRole: function ({state, params}) {

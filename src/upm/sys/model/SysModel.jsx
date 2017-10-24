@@ -1,5 +1,5 @@
 import * as service from '../service/Service';
-
+import assign from 'object-assign';
 export default {
 	state: {
 		OrgDialog: {
@@ -13,13 +13,13 @@ export default {
 		/*打开系统弹出窗口*/
 		openSysModal: function ({state, params, put}) {
 			let OrgDialog = state.OrgDialog;
-			Object.assign(OrgDialog, params);
+			assign(OrgDialog, params);
 			return {OrgDialog};
 		},
 		/*关闭系统弹出窗口*/
 		closeSysModal: function ({state, params, put}) {
 			let OrgDialog = state.OrgDialog;
-			Object.assign(OrgDialog, {visible: false});
+			assign(OrgDialog, {visible: false});
 			return {OrgDialog};
 		},
 		/*查询系统列表*/

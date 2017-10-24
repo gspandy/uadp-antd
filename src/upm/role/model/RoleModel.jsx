@@ -1,5 +1,5 @@
 import * as service from '../service/Service';
-
+import assign from 'object-assign';
 export default {
 	namespace: 'role',
 	state: {
@@ -39,13 +39,13 @@ export default {
 		/*打开角色弹出框*/
 		openRoleDialog: function ({state, params}) {
 			let roleProps = state.roleProps;
-			Object.assign(roleProps, params, {visible: true});
+			assign(roleProps, params, {visible: true});
 			return {roleProps: roleProps};
 		},
 		/*关闭角色弹出框*/
 		closeRoleModal: function ({state}) {
 			let roleProps = state.roleProps;
-			Object.assign(roleProps, {visible: false});
+			assign(roleProps, {visible: false});
 			return {roleProps: roleProps};
 		},
 		/*装载功能模块树*/
@@ -59,7 +59,7 @@ export default {
 		/*关闭功能模块弹出框*/
 		closeModuleDialog: function ({state}) {
 			let moduleProps = state.moduleProps;
-			Object.assign(moduleProps, {visible: false});
+			assign(moduleProps, {visible: false});
 			return {moduleProps: moduleProps};
 		},
 		/*保存角色*/
@@ -71,7 +71,7 @@ export default {
 		},
 		checkModules: function ({state, params}) {
 			let moduleProps = state.moduleProps;
-			Object.assign(moduleProps, {selectedModules: service.filterTree(params, moduleProps.moduleTree)});
+			assign(moduleProps, {selectedModules: service.filterTree(params, moduleProps.moduleTree)});
 			return {moduleProps: moduleProps};
 		},
 		updateRoleModule({state, params, dispatch}) {

@@ -1,5 +1,6 @@
 import * as service from '../service/Service';
 import Constant from '../../../common/Constant';
+import assign from 'object-assign';
 
 export default {
 	state: {
@@ -19,19 +20,19 @@ export default {
 		/** 打开数据字典弹出窗口 **/
 		openDictDialog: function ({state, params}) {
 			let dictDialogProps = state.dictDialogProps;
-			Object.assign(dictDialogProps, params);
+			assign(dictDialogProps, params);
 			return {dictDialogProps};
 		},
 		/** 关闭数据字典弹出窗口 **/
 		closeDictDialog: function ({state}) {
 			let dictDialogProps = state.dictDialogProps;
-			Object.assign(dictDialogProps, {visible: false});
+			assign(dictDialogProps, {visible: false});
 			return {dictDialogProps};
 		},
 		/** 改变分页时调用 **/
 		changePage: function ({state, params, put, dispatch}) {
 			let dictPagination = state.dictPagination;
-			Object.assign(dictPagination, params);
+			assign(dictPagination, params);
 			put(dictPagination);
 			dispatch({type: 'listDict'})
 		},
@@ -42,7 +43,7 @@ export default {
 		/** 搜索数据字典 **/
 		searchDict: function ({state, params, put}) {
 			let dictPagination = state.dictPagination;
-			Object.assign(dictPagination, {pageNo: 1});
+			assign(dictPagination, {pageNo: 1});
 			put(dictPagination);
 			put({searchValue: params.value, dictPagination});
 			service.listDict(state, put);

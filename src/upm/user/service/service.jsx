@@ -1,5 +1,6 @@
 import {request} from 'uadp-react';
 import {Modal, message} from 'antd';
+import assign from 'object-assign';
 
 const confirm = Modal.confirm;
 
@@ -33,7 +34,7 @@ export function generatePinyin(state, params, put) {
 export function initUserType(state, put) {
 	request.post('../dict/listDictByKey.do', {key: 'user_type'}, function (res) {
 		let userProps = state.userProps;
-		Object.assign(userProps, {userType: res});
+		assign(userProps, {userType: res});
 		put({userProps: userProps});
 	});
 }
@@ -41,32 +42,32 @@ export function initUserType(state, put) {
 export function saveUser(state, params, put, dispatch) {
 	let userProps = state.userProps;
 	if (userProps.isNew) {
-		Object.assign(userProps, {loading: true});
+		assign(userProps, {loading: true});
 		put({userProps: userProps});
-		request.post('insertUser.do', Object.assign(params, {toOrgId: state.selectTreeKey}), function (res) {
+		request.post('insertUser.do', assign(params, {toOrgId: state.selectTreeKey}), function (res) {
 
 			if (res.success) {
-				Object.assign(userProps, {loading: false, visible: false});
+				assign(userProps, {loading: false, visible: false});
 				message.success(res.msg, 3);
 			} else {
-				Object.assign(userProps, {loading: false});
+				assign(userProps, {loading: false});
 				message.error(res.msg, 3);
 			}
 			put({userProps: userProps});
 			dispatch({type: 'refreshUserList'});
 		}, function (err) {
-			Object.assign(userProps, {loading: false});
+			assign(userProps, {loading: false});
 			put({userProps: userProps});
 			message.success('新建用户失败！');
 		});
 	} else {
 		request.post('updateUser.do', params, function () {
-			Object.assign(userProps, {loading: false, visible: false});
+			assign(userProps, {loading: false, visible: false});
 			put(userProps);
 			dispatch({type: 'refreshUserList'});
 			message.success('修改角色成功！');
 		}, function (err) {
-			Object.assign(userProps, {loading: false});
+			assign(userProps, {loading: false});
 			put(userProps);
 			message.success('修改用户失败！');
 		});
@@ -87,15 +88,15 @@ export function deleteUser(state, params, put, dispatch) {
 
 export function resetPassword(state, params, put, dispatch) {
 	let resetPasswordProps = state.resetPasswordProps;
-	Object.assign(resetPasswordProps, {loading: true});
+	assign(resetPasswordProps, {loading: true});
 
 	put({resetPasswordProps: resetPasswordProps});
 	request.post('resetPassword.do', params, function () {
-		Object.assign(resetPasswordProps, {loading: false, visible: false});
+		assign(resetPasswordProps, {loading: false, visible: false});
 		put(resetPasswordProps);
 		message.success('重置密码成功！');
 	}, function (err) {
-		Object.assign(resetPasswordProps, {loading: false});
+		assign(resetPasswordProps, {loading: false});
 		put(resetPasswordProps);
 		message.success('重置密码失败！');
 	});

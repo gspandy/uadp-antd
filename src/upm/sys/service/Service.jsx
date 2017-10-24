@@ -1,6 +1,6 @@
 import {request} from 'uadp-react';
 import {Modal, message} from 'antd';
-
+import assign from 'object-assign';
 const confirm = Modal.confirm;
 
 /**
@@ -17,10 +17,10 @@ export function querySys(params, put) {
  */
 export function addSys(state, params, put, dispatch) {
 	let OrgDialog = state.OrgDialog;
-	Object.assign(OrgDialog, {loading: true});
+	assign(OrgDialog, {loading: true});
 	put(OrgDialog);
 	request.post('addSys.do', params, function () {
-		Object.assign(OrgDialog, {loading: false, visible: false});
+		assign(OrgDialog, {loading: false, visible: false});
 		put(OrgDialog);
 		dispatch({type: 'querySys', params: {name: ''}});
 	});
@@ -31,14 +31,14 @@ export function addSys(state, params, put, dispatch) {
  */
 export function editSys(state, params, put, dispatch) {
 	let OrgDialog = state.OrgDialog;
-	Object.assign(OrgDialog, {loading: true});
+	assign(OrgDialog, {loading: true});
 	put(OrgDialog);
 	request.post('updateSys.do', params, function () {
-		Object.assign(OrgDialog, {loading: false, visible: false});
+		assign(OrgDialog, {loading: false, visible: false});
 		put(OrgDialog);
 		dispatch({type: 'querySys', params: {name: ''}});
 	}, function (err) {
-		Object.assign(OrgDialog, {loading: false});
+		assign(OrgDialog, {loading: false});
 		put(OrgDialog);
 	});
 }

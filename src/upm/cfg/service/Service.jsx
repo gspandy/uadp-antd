@@ -1,4 +1,5 @@
 import {request} from 'uadp-react';
+import assign from 'object-assign';
 import {Modal, message} from 'antd';
 
 const confirm = Modal.confirm;
@@ -38,14 +39,14 @@ export function addCfg(state, params, put, dispatch) {
  */
 export function updateCfg(state, params, put, dispatch) {
 	let cfgDialogProps = state.cfgDialogProps;
-	Object.assign(cfgDialogProps, {loading: true});
+	assign(cfgDialogProps, {loading: true});
 	put(cfgDialogProps);
 	request.post('updateCfg.do', params, function (res) {
-		Object.assign(cfgDialogProps, {loading: false, visible: false});
+		assign(cfgDialogProps, {loading: false, visible: false});
 		put(cfgDialogProps);
 		dispatch({type: 'listCfg'});
 	}, function (err) {
-		Object.assign(cfgDialogProps, {loading: false});
+		assign(cfgDialogProps, {loading: false});
 		put(cfgDialogProps);
 		message.error("请求错误！");
 	});

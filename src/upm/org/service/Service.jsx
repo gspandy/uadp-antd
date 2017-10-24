@@ -1,4 +1,5 @@
 import {request} from 'uadp-react';
+import assign from 'object-assign';
 import {Modal, message} from 'antd';
 
 const confirm = Modal.confirm;
@@ -35,7 +36,7 @@ export function queryOrg(id, cascade, put) {
 export function saveOrg(state, org, put, dispatch) {
 	if (state.isNew) {
 		put({loading: true});
-		request.post('insertOrg.do', Object.assign({}, org, {parentId: state.selectTreeKey}), function () {
+		request.post('insertOrg.do', assign({}, org, {parentId: state.selectTreeKey}), function () {
 			put({loading: false, visible: false});
 			dispatch({type: 'initTreeData'});
 			message.success('新建机构成功！');

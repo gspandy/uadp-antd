@@ -3,6 +3,8 @@
  */
 import {message, Modal} from 'antd';
 import {request} from 'uadp-react';
+import assign from 'object-assign';
+
 const confirm = Modal.confirm;
 export function listModuleTree(state, put) {
 	request.post('listModuleTree.do', function (res) {
@@ -53,15 +55,15 @@ export function addModule(state, params, put, dispatch) {
  */
 export function updateModule(state, params, put, dispatch) {
 	let moduleDialogProps = state.moduleDialogProps;
-	Object.assign(moduleDialogProps, {loading: true});
+	assign(moduleDialogProps, {loading: true});
 	put(moduleDialogProps);
 	request.post('updateModule.do', params, function (res) {
-		Object.assign(moduleDialogProps, {loading: false, visible: false});
+		assign(moduleDialogProps, {loading: false, visible: false});
 		put(moduleDialogProps);
 		dispatch({type: 'listModule'});
 		dispatch({type: 'listModuleTree'});
 	}, function (err) {
-		Object.assign(moduleDialogProps, {loading: false});
+		assign(moduleDialogProps, {loading: false});
 		put(moduleDialogProps);
 		message.error("请求错误！");
 	});

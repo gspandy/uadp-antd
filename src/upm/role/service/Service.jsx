@@ -1,5 +1,6 @@
 import {request} from 'uadp-react';
 import {Modal, message} from 'antd';
+import assign from 'object-assign';
 
 const confirm = Modal.confirm;
 
@@ -20,7 +21,7 @@ export function initOrgTree(put, dispatch) {
 export function initOrgType(state, put) {
 	request.post('../dict/listDictByKey.do', {key: 'org_type'}, function (res) {
 		let roleProps = state.roleProps;
-		Object.assign(roleProps, {orgType: res});
+		assign(roleProps, {orgType: res});
 		put({roleProps: roleProps});
 	});
 }
@@ -34,7 +35,7 @@ export function queryRoleList(orgId, put) {
 export function queryModuleTree(state, put) {
 	request.post('../module/listModuleTree.do', function (res) {
 		let moduleProps = state.moduleProps;
-		Object.assign(moduleProps, {moduleTree: res});
+		assign(moduleProps, {moduleTree: res});
 		put({moduleProps: moduleProps});
 	});
 }
@@ -42,26 +43,26 @@ export function queryModuleTree(state, put) {
 export function saveRole(state, params, put, dispatch) {
 	let roleProps = state.roleProps;
 	if (roleProps.isNew) {
-		Object.assign(roleProps, {loading: true});
+		assign(roleProps, {loading: true});
 		put(roleProps);
-		request.post('insertRole.do', Object.assign(params, {toOrgId: state.selectTreeKey}), function () {
-			Object.assign(roleProps, {loading: false, visible: false});
+		request.post('insertRole.do', assign(params, {toOrgId: state.selectTreeKey}), function () {
+			assign(roleProps, {loading: false, visible: false});
 			put(roleProps);
 			dispatch({type: 'refreshRoleList'});
 			message.success('新建角色成功！');
 		}, function (err) {
-			Object.assign(roleProps, {loading: false});
+			assign(roleProps, {loading: false});
 			put(roleProps);
 			message.success('新建角色失败！');
 		});
 	} else {
 		request.post('updateRole.do', params, function () {
-			Object.assign(roleProps, {loading: false, visible: false});
+			assign(roleProps, {loading: false, visible: false});
 			put(roleProps);
 			dispatch({type: 'refreshRoleList'});
 			message.success('修改角色成功！');
 		}, function (err) {
-			Object.assign(roleProps, {loading: false});
+			assign(roleProps, {loading: false});
 			put(roleProps);
 			message.success('修改角色失败！');
 		});
@@ -82,9 +83,9 @@ export function deleteRole(state, params, dispatch) {
 
 export function queryRoleModuleList(state, params, put) {
 	let moduleProps = state.moduleProps;
-	Object.assign(moduleProps, {visible: true, isSet: params.isSet});
+	assign(moduleProps, {visible: true, isSet: params.isSet});
 	request.post('queryRoleModuleList.do', params, function (res) {
-		Object.assign(moduleProps, {selectedModules: res});
+		assign(moduleProps, {selectedModules: res});
 		put({moduleProps: moduleProps, setRoleId: params.roleId});
 	});
 }
